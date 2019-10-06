@@ -1,0 +1,7 @@
+/rental https://rentamotorcycle.co.uk 200
+/datapoint/* http://datapoint.metoffice.gov.uk/public/data/:splat 200
+/weather /.netlify/functions/weather 200
+/bridges /.netlify/functions/bridges 200
+/ferries /.netlify/functions/ferries 200
+/calmac /.netlify/functions/calmac 200
+/metoffice /.netlify/functions/metoffice 200
