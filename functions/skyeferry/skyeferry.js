@@ -1,8 +1,10 @@
+// Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
+
 const chromium = require('chrome-aws-lambda');
 
 exports.handler = async (event, context) => {
 
-    const url = 'https://trafficscotland.org/bridgerestrictions/index.aspx';
+    const url = 'https://skyeferry.co.uk/';
 
     const browser = await chromium.puppeteer.launch({
         executablePath: await chromium.executablePath,
@@ -16,7 +18,7 @@ exports.handler = async (event, context) => {
 
     await page.goto(url);
 
-    const element = await page.$('.main');
+    const element = await page.$('.alert');
     const ss = await element.screenshot();
     const b64 = ss.toString('base64');
 
