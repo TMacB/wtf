@@ -1,5 +1,3 @@
-// Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-
 const chromium = require('chrome-aws-lambda');
 
 exports.handler = async (event, context) => {

@@ -3,7 +3,7 @@
 // Weather Forecasts
 // ===========================================
 const getWeather = async (location) => {
-  console.info("main.js -> getWeather -> " + location);
+  console.info(`main.js -> getWeather -> ${location}`);
 
   const res = await fetch(`/weather?location=${location.replace(/ /g, "_")}`);
   const json = await res.json();
@@ -11,19 +11,20 @@ const getWeather = async (location) => {
   const node = document.createElement("div");
   node.innerHTML = `<h4>${location}</h4><img src="${json.src}"/>`;
   element.appendChild(node);
-}
+};
 
 const places = document.getElementsByClassName("weather");
 for (var i = 0; i < places.length; i++) {
   const location = places[i].id;
-  getWeather(location);
+  // getWeather(location);
 }
+
 
 // ===========================================
 // Calmac Statuses
 // ===========================================
 const getCalmacStatus = async () => {
-  console.info("main.js -> getCalmacStatus");
+  console.info(`main.js -> getCalmacStatus`);
 
   const res = await fetch('/calmac');
   const json = await res.json();
@@ -67,15 +68,15 @@ const getCalmacStatus = async () => {
     el.innerHTML = status[s];
     element.appendChild(el);
   }
-}
-
+};
 getCalmacStatus();
+
 
 // ===========================================
 // Bridge Statuses
 // ===========================================
 const getBridges = async () => {
-  console.info("main.js -> getBridges");
+  console.info(`main.js -> getBridges`);
 
   const res = await fetch(`/bridges`);
   const json = await res.json();
@@ -83,15 +84,15 @@ const getBridges = async () => {
   const node = document.createElement("div");
   node.innerHTML = `<img src="${json.src}"/>`;
   element.appendChild(node);
-}
-
+};
 getBridges();
+
 
 // ===========================================
 // Met Office Warnings
 // ===========================================
 const getMetOfficeWarnings = async () => {
-  console.info("main.js -> getMetOfficeWarnings");
+  console.info(`main.js -> getMetOfficeWarnings`);
 
   const res = await fetch(`/metoffice`);
   const json = await res.json();
@@ -105,7 +106,6 @@ const getMetOfficeWarnings = async () => {
     element.appendChild(el);
   }
 };
-
 getMetOfficeWarnings();
 
 
@@ -113,7 +113,7 @@ getMetOfficeWarnings();
 // Travel Scotland - Incidents
 // ===========================================
 const getIncidents = async () => {
-  console.info("main.js -> getIncidents");
+  console.info(`main.js -> getIncidents`);
 
   const res = await fetch(`/incidents`);
   const json = await res.json();
@@ -122,40 +122,55 @@ const getIncidents = async () => {
   const element = document.getElementById('incidents');
   for (var s in json.items) {
     const j = json.items[s];
-    const el = document.createElement("div");
-    el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> - published on: ${j.pubDate}<br/>${j.content}</td></tr></table>`;
+    const el = document.createElement('div');
+
+    if (j.title == 'error') {
+      console.error("Error retrieving Travel Scotland Incidents...")
+      console.error(j.content)
+      el.innerHTML = `Error loading <a href="${j.link}">Travel Scotland Incidents</a> - Please try refreshing your browser`;
+    }
+    else {
+      el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> - published on: ${j.pubDate}<br/>${j.content}</td></tr></table>`;
+    }
     element.appendChild(el);
   }
 };
-
 getIncidents();
+
 
 // ===========================================
 // Travel Scotland - Roadworks
 // ===========================================
 const getRoadworks = async () => {
-  console.info("main.js -> getRoadworks");
+  console.info(`main.js -> getRoadworks`);
 
   const res = await fetch(`/roadworks`);
   const json = await res.json();
-  console.dir(json.items);
 
   const element = document.getElementById('roadworks');
   for (var s in json.items) {
     const j = json.items[s];
-    const el = document.createElement("div");
-    el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> - published on: ${j.pubDate}<br/>${j.content}</td></tr></table>`;
+    const el = document.createElement('div');
+
+    if (j.title == 'error') {
+      console.error('Error retrieving Travel Scotland Roadworks...')
+      console.error(j.content)
+      el.innerHTML = `Error loading <a href="${j.link}">Travel Scotland Roadworks</a> - Please try refreshing your browser`;
+    }
+    else {
+      el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> - published on: ${j.pubDate}<br/>${j.content}</td></tr></table>`;
+    }
     element.appendChild(el);
   }
 };
-
 getRoadworks();
+
 
 // ===========================================
 // Skye Ferry Status
 // ===========================================
 const getSkyeFerry = async () => {
-  console.info("main.js -> getSkyeFerry");
+  console.info(`main.js -> getSkyeFerry`);
 
   const res = await fetch(`/skyeferry`);
   const json = await res.json();
@@ -163,6 +178,5 @@ const getSkyeFerry = async () => {
   const node = document.createElement("div");
   node.innerHTML = `<h4>Glenelg / Skye Ferry</h4><img src="${json.src}"/>`;
   element.appendChild(node);
-}
-
+};
 getSkyeFerry();

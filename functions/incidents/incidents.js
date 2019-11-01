@@ -4,22 +4,19 @@ const parser = new Parser();
 exports.handler = async function(event, context) {
   try {
 
-    let feed = await parser.parseURL('https://trafficscotland.org/rss/feeds/currentincidents.aspx');
-    // console.info(feed.title);
-    // console.dir(feed);
+    const feed = await parser.parseURL('https://trafficscotland.org/rss/feeds/currentincidents.aspx');
 
     return {
       statusCode: 200,
       body: JSON.stringify(feed)
     };
 
-
   } catch (err) {
-    console.err(err); // output to netlify function log
+    console.log(err); // output to netlify function log
 
     return {
       statusCode: 500,
-      body: JSON.stringify({ "msg": err.message }) // Could be a custom message or object i.e. JSON.stringify(err)
+      body: JSON.stringify({ items: [{ title: "error", link: 'http://trafficscotland.org/currentincidents/index.aspx', content: err.message }] })
     };
   }
 };
