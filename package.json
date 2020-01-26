@@ -20,8 +20,8 @@
     "puppeteer": "^2.0.0"
   },
   "dependencies": {
-    "chrome-aws-lambda": "^2.0.0",
-    "gatsby-cli": "^2.8.8",
+    "chrome-aws-lambda": "^2.0.2",
+    "gatsby-cli": "^2.8.27",
     "node-fetch": "^2.6.0",
     "puppeteer-core": "^2.0.0",
     "rss-parser": "^3.7.3"
