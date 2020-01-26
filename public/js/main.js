@@ -1,3 +1,4 @@
+/*jshint esversion: 8 */
 
 // ===========================================
 // Weather Forecasts
@@ -13,11 +14,13 @@ const getWeather = async (location) => {
   element.appendChild(node);
 };
 
-const places = document.getElementsByClassName("weather");
-for (var i = 0; i < places.length; i++) {
-  const location = places[i].id;
-  // getWeather(location);
-}
+const getForecasts = () => {
+  const places = document.getElementsByClassName("weather");
+  for (var i = 0; i < places.length; i++) {
+    const location = places[i].id;
+    getWeather(location);
+  }
+};
 
 
 // ===========================================
@@ -33,19 +36,19 @@ const getCalmacStatus = async () => {
     let src = '';
     switch (f.image) {
       case 'normal':
-        src = 'https://www.calmac.co.uk/image/1788/normal-icon-green/original.png'
+        src = 'https://www.calmac.co.uk/image/1788/normal-icon-green/original.png';
         break;
       case 'beware':
-        src = 'https://www.calmac.co.uk/image/3119/Be-Aware-Yellow-icon/original.jpg'
+        src = 'https://www.calmac.co.uk/image/3119/Be-Aware-Yellow-icon/original.jpg';
         break;
       case 'affected':
-        src = 'https://www.calmac.co.uk/image/1787/maybe-affected-icon-amber/original.png'
+        src = 'https://www.calmac.co.uk/image/1787/maybe-affected-icon-amber/original.png';
         break;
       case 'cancelled':
-        src = 'https://www.calmac.co.uk/image/1786/cancelled-icon-red/original.png'
+        src = 'https://www.calmac.co.uk/image/1786/cancelled-icon-red/original.png';
         break;
       default:
-        'no-image';
+        src = 'no-image';
     }
 
     f.reason = '- ' + f.reason;
@@ -60,8 +63,8 @@ const getCalmacStatus = async () => {
 
   const element = document.getElementById('calmac');
   const h = document.createElement("h4");
-    h.innerHTML = "Calmac";
-    element.appendChild(h);
+  h.innerHTML = "Calmac";
+  element.appendChild(h);
 
   for (var s in status) {
     const el = document.createElement("div");
@@ -69,7 +72,6 @@ const getCalmacStatus = async () => {
     element.appendChild(el);
   }
 };
-getCalmacStatus();
 
 
 // ===========================================
@@ -81,11 +83,16 @@ const getBridges = async () => {
   const res = await fetch(`/bridges`);
   const json = await res.json();
   const element = document.getElementById('bridges');
+
+  const h = document.createElement("h4");
+  h.innerHTML = "Bridges";
+  element.appendChild(h);
+
   const node = document.createElement("div");
+  node.align = "center";
   node.innerHTML = `<img src="${json.src}"/>`;
   element.appendChild(node);
 };
-getBridges();
 
 
 // ===========================================
@@ -99,14 +106,25 @@ const getMetOfficeWarnings = async () => {
   // console.dir(json);
 
   const element = document.getElementById('metoffice');
+  const h = document.createElement("h4");
+  h.innerHTML = "Met Office Weather Warnings";
+  element.appendChild(h);
+
   for (var s in json) {
     const j = json[s];
     const el = document.createElement("div");
-    el.innerHTML = `<table><tr><td><img src="${j.icon}"/>&nbsp;</td><td><a href="${j.link}">${j.title}</a> - ${j.time}<br/>${j.desc}</td></tr></table>`;
+
+    if (j.title == 'error') {
+      console.error("Error retrieving Met Office Warnings...");
+      console.error(j.content);
+      el.innerHTML = `Error loading <a href="${j.link}">Met Office Warnings</a> - Please try refreshing your browser`;
+    }
+    else {
+      el.innerHTML = `<table><tr><td><img src="${j.icon}"/>&nbsp;</td><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.time}</span><br/>${j.desc}</td></tr></table>`;
+    }
     element.appendChild(el);
   }
 };
-getMetOfficeWarnings();
 
 
 // ===========================================
@@ -116,26 +134,30 @@ const getIncidents = async () => {
   console.info(`main.js -> getIncidents`);
 
   const res = await fetch(`/incidents`);
-  const json = await res.json();
-  // console.dir(json.items);
+  let json = await res.json();
+  json = json.items;
+  // console.dir(json);
 
   const element = document.getElementById('incidents');
-  for (var s in json.items) {
-    const j = json.items[s];
+  const h = document.createElement("h4");
+  h.innerHTML = "Incidents";
+  element.appendChild(h);
+
+  for (var s in json) {
+    const j = json[s];
     const el = document.createElement('div');
 
     if (j.title == 'error') {
-      console.error("Error retrieving Travel Scotland Incidents...")
-      console.error(j.content)
+      console.error("Error retrieving Travel Scotland Incidents...");
+      console.error(j.content);
       el.innerHTML = `Error loading <a href="${j.link}">Travel Scotland Incidents</a> - Please try refreshing your browser`;
     }
     else {
-      el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> - published on: ${j.pubDate}<br/>${j.content}</td></tr></table>`;
+      el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.pubDate}<span><br/>${j.content}</td></tr></table>`;
     }
     element.appendChild(el);
   }
 };
-getIncidents();
 
 
 // ===========================================
@@ -145,25 +167,72 @@ const getRoadworks = async () => {
   console.info(`main.js -> getRoadworks`);
 
   const res = await fetch(`/roadworks`);
-  const json = await res.json();
+  let json = await res.json();
+  json = json.items;
+
+  json = json.sort(function (a, b) {
+    var x = a['title'];
+    var y = b['title'];
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  });
 
   const element = document.getElementById('roadworks');
-  for (var s in json.items) {
-    const j = json.items[s];
+  const h = document.createElement("h4");
+  h.className = "collapsible";
+  h.onclick = function () {
+    collapse(this);
+  };
+  h.innerHTML = "Roadworks";
+  element.appendChild(h);
+
+  const content = document.createElement("div");
+  content.className = "content";
+  element.appendChild(content);
+
+  for (var s in json) {
+    const j = json[s];
     const el = document.createElement('div');
 
     if (j.title == 'error') {
-      console.error('Error retrieving Travel Scotland Roadworks...')
-      console.error(j.content)
+      console.error('Error retrieving Travel Scotland Roadworks...');
+      console.error(j.content);
       el.innerHTML = `Error loading <a href="${j.link}">Travel Scotland Roadworks</a> - Please try refreshing your browser`;
     }
     else {
-      el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> - published on: ${j.pubDate}<br/>${j.content}</td></tr></table>`;
+
+      j.content = j.content.replace(/^Start Date: /gi, '');
+      j.content = j.content.replace(/ - 00:00<br \/>End Date: /gi, ' - ');
+      j.content = j.content.replace(/ - 00:00/gi, '');
+      j.content = j.content.replace(/<br \/>/gi, ' -');
+      j.content = j.content.replace(/ -$/gi, '');
+      j.content = j.content.replace(/Delay Information:/gi, ' ');
+
+      j.content = j.content.replace(/Monday,/g, 'Mon');
+      j.content = j.content.replace(/Tuesday,/g, 'Tue');
+      j.content = j.content.replace(/Wednesday,/g, 'Wed');
+      j.content = j.content.replace(/Thursday,/g, 'Thu');
+      j.content = j.content.replace(/Friday,/g, 'Fri');
+      j.content = j.content.replace(/Saturday,/g, 'Sat');
+      j.content = j.content.replace(/Sunday,/g, 'Sun');
+
+      j.content = j.content.replace(/January/g, 'Jan');
+      j.content = j.content.replace(/February/g, 'Feb');
+      j.content = j.content.replace(/March/g, 'Mar');
+      j.content = j.content.replace(/April/g, 'April');
+      j.content = j.content.replace(/June/g, 'Jun');
+      j.content = j.content.replace(/July/g, 'Jul');
+      j.content = j.content.replace(/August/g, 'Aug');
+      j.content = j.content.replace(/September/g, 'Sep');
+      j.content = j.content.replace(/October/g, 'Oct');
+      j.content = j.content.replace(/November/g, 'Nov');
+      j.content = j.content.replace(/December/g, 'Dec');
+
+      el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.content}</span></td></tr></table>`;
     }
-    element.appendChild(el);
+    content.appendChild(el);
   }
+  // element.appendChild(content);
 };
-getRoadworks();
 
 
 // ===========================================
@@ -175,8 +244,39 @@ const getSkyeFerry = async () => {
   const res = await fetch(`/skyeferry`);
   const json = await res.json();
   const element = document.getElementById('skyeferry');
+
+  const h = document.createElement("h4");
+  h.innerHTML = "Glenelg / Skye Ferry";
+  element.appendChild(h);
+
   const node = document.createElement("div");
-  node.innerHTML = `<h4>Glenelg / Skye Ferry</h4><img src="${json.src}"/>`;
+  node.align = 'center';
+  node.innerHTML = `<img src="${json.src}"/>`;
   element.appendChild(node);
 };
+
+
+// ===========================================
+// Get Items
+// ===========================================
+
+getMetOfficeWarnings();
+getForecasts();
+
+getIncidents();
+getRoadworks();
+getBridges();
+
 getSkyeFerry();
+getCalmacStatus();
+
+
+collapse = (e) => {
+  e.classList.toggle("active");
+  var content = e.nextElementSibling;
+  if (content.style.display === "block") {
+    content.style.display = "none";
+  } else {
+    content.style.display = "block";
+  }
+}

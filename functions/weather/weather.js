@@ -1,4 +1,4 @@
-// Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
+/*jshint esversion: 8 */
 
 const chromium = require('chrome-aws-lambda');
 
@@ -6,7 +6,7 @@ exports.handler = async (event, context) => {
 
     console.dir(event.queryStringParameters.location);
 
-    let location = event.queryStringParameters.location;
+    const location = event.queryStringParameters.location;
 
     const SITE = 'https://www.yr.no/place/United_Kingdom/Scotland/';
     const PAGE = '/hour_by_hour_detailed.html';
@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
         executablePath: await chromium.executablePath,
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        headless: chromium.headless,
+        headless: true, //chromium.headless,
     });
 
     const page = await browser.newPage();

@@ -2,46 +2,55 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>WTF</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="style/style.css">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WTF</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style/normalize.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    <div class="container">
 
         <h1>Weather, Traffic and Ferries</h1>
 
-        <h2>Weather</h2>
-        <div id="metoffice"></div>
-        <div class="weather" id="Edinburgh"></div>
-        <div class="weather" id="Grantown on Spey"></div>
-        <div class="weather" id="Tongue"></div>
-        <div class="weather" id="Shieldaig"></div>
-        <div class="weather" id="Portree"></div>
-        <div class="weather" id="Glenelg"></div>
-        <div class="weather" id="Inveraray"></div>
+        <section>
+            <h2>Weather</h2>
+            <div id="metoffice"></div>
+            <div class="weather" id="Edinburgh"></div>
+            <div class="weather" id="Grantown on Spey"></div>
+            <div class="weather" id="Tongue"></div>
+            <div class="weather" id="Shieldaig"></div>
+            <div class="weather" id="Portree"></div>
+            <div class="weather" id="Glenelg"></div>
+            <div class="weather" id="Inveraray"></div>
+        </section>
 
-        <h2>Traffic</h2>
-        <h4>Incidents</h4>
-        <div id="incidents"></div>
-        <h4>Roadworks</h4>
-        <div id="roadworks"></div>
+        <section>
+            <h2>Traffic</h2>
+            <div id="incidents"></div>
+            <div id="roadworks"></div>
+            <div id="bridges"></div>
+        </section>
 
-        <h2>Bridges</h2>
-        <div id="bridges"></div>
+        <section>
+            <h2>Ferries</h2>
+            <div id="skyeferry"></div>
+            <div id="calmac"></div>
+        </section>
+    </div>
 
-        <h2>Ferries</h2>
-        <div id="skyeferry"></div>
-        <div id="calmac"></div>
-        
-        <script src="js/main.js" async defer></script>
-    </body>
+    <script src="js/main.js" async defer></script>
+</body>
+
 </html>

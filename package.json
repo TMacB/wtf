@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "chrome-aws-lambda": "^2.0.0",
+    "gatsby-cli": "^2.8.8",
     "node-fetch": "^2.6.0",
     "puppeteer-core": "^2.0.0",
     "rss-parser": "^3.7.3"

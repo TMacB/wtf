@@ -1,3 +1,79 @@
-html, body {
-    font-family: Arial, Helvetica, sans-serif
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95em;
+  max-width: 800px;
+  margin: 0px auto;
+  background-color: #ccc;
+}
+
+.container {
+  display: flex; /* or inline-flex */
+  flex-direction: column;
+}
+
+section {
+  background: #fff;
+  border-radius: 0.5em;
+  margin: 1em 0;
+}
+
+section > * {
+  padding: 0.2em;
+}
+
+h1 {
+  margin-bottom: 0.2em;
+}
+
+h2 {
+  /* width: 100%; */
+  color: #fff;
+  background-color: #005eb8;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
+  border-bottom: 2px solid black;
+  padding: 0.5em;
+  margin: 0 auto;
+  margin-bottom: 0.4em;
+}
+
+h3,
+h4 {
+  margin-top: 0.3em;
+  margin-bottom: 0.2em;
+  padding: 0.1em;
+}
+
+.weather > div > img, #bridges > div > img, #skyeferry > div > img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 792px;
+  }
+
+.date {
+  font-size: 0.8em;
+}
+
+.collapsible {
+}
+
+.content {
+  display: none;
+}
+
+.collapsible:after {
+  content: "\02795";
+  /* Unicode character for "plus" sign (+) */
+  /* font-size: 1em; */
+  color: white;
+  /* float: right; */
+  /* margin-right: 2em; */
+  padding-left: 0.5em;
+}
+
+.active:after {
+  content: "\2796";
+  /* Unicode character for "minus" sign (-) */
 }

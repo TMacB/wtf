@@ -1,3 +1,5 @@
+/*jshint esversion: 8 */
+
 const Parser = require('rss-parser');
 const parser = new Parser();
 
