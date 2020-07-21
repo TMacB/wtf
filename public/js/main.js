@@ -10,7 +10,7 @@ const getWeather = async (location) => {
   const json = await res.json();
   const element = document.getElementById(location);
   const node = document.createElement("div");
-  node.innerHTML = `<h4>${location}</h4><img src="${json.src}"/>`;
+  node.innerHTML = `<h4>${location}</h4><img class="u-max-full-width" src="${json.src}"/>`;
   element.appendChild(node);
 };
 
@@ -159,7 +159,8 @@ const getIncidents = async () => {
       el.innerHTML = `Error loading <a href="${j.link}">Travel Scotland Incidents</a> - Please try refreshing your browser`;
     }
     else {
-      el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.pubDate}<span><br/>${j.content}</td></tr></table>`;
+      // el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.pubDate}<span><br/>${j.content}</td></tr></table>`;
+      el.innerHTML = `<a href="${j.link}">${j.title}</a> <span class="date">- ${j.pubDate}<span><br/>${j.content}<br/><br/>`;
     }
     element.appendChild(el);
   }
@@ -233,7 +234,7 @@ const getRoadworks = async () => {
       j.content = j.content.replace(/November/g, 'Nov');
       j.content = j.content.replace(/December/g, 'Dec');
 
-      el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.content}</span></td></tr></table>`;
+      el.innerHTML = `<a href="${j.link}">${j.title}</a> <span class="date">- ${j.content}</span><br/>`;
     }
     content.appendChild(el);
   }
