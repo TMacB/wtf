@@ -19,9 +19,12 @@ exports.handler = async function (event, context) {
     // return if none found
     if (feed.items.length == 0) {
       console.info('No MetOffice Warnings...');
+
+      const msg = {"title": "no warnings"};
+
       return {
         statusCode: 200,
-        body: JSON.stringify('No MetOffice Warnings')
+        body: JSON.stringify(msg)
       };
     } else {
       console.info(`${feed.items.length}  MetOffice Warnings detected...`);
