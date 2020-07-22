@@ -18,8 +18,8 @@ const getWeather = async (location) => {
                       </div>
                     </div>`;
     node.innerHTML = `<h4 class="section-heading">${location}</h4>
-                      <img class="u-max-full-width" src="${json.src}"/>'
-                        element.appendChild(node);`
+                      <img class="u-max-full-width" src="${json.src}"/>`
+  element.appendChild(node);
 };
 
 const getForecasts = () => {
