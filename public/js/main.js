@@ -116,25 +116,30 @@ const getMetOfficeWarnings = async () => {
   h.innerHTML = "Met Office Weather Warnings";
   element.appendChild(h);
 
-  console.log(json);
+  // console.log(json);
 
-  for (var s in json) {
-    const j = json[s];
-    const el = document.createElement("div");
-
-    if (j.title == 'error') {
-      console.error("Error retrieving Met Office Warnings...");
-      console.error(j.content);
-      el.innerHTML = `Error loading <a href="${j.link}">Met Office Warnings</a> - Please try refreshing your browser`;
-    }
-    else if (j == 'no warnings') {
-      el.innerHTML = `No Warnings in place`;
-    }
-    else {
-      el.innerHTML = `<table><tr><td><img src="${j.icon}"/>&nbsp;</td><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.time}</span><br/>${j.desc}</td></tr></table>`;
-    }
-    element.appendChild(el);
+  if (json.title == 'no warnings') {
+    element.style.display = 'none';
   }
+  else {
+
+    for (var s in json) {
+      const j = json[s];
+      const el = document.createElement("div");
+  
+      if (j.title == 'error') {
+        console.error("Error retrieving Met Office Warnings...");
+        console.error(j.content);
+        el.innerHTML = `Error loading <a href="${j.link}">Met Office Warnings</a> - Please try refreshing your browser`;
+      }
+      else {
+        el.innerHTML = `<table><tr><td><img src="${j.icon}"/>&nbsp;</td><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.time}</span><br/>${j.desc}</td></tr></table>`;
+      }
+      element.appendChild(el);
+    }
+
+  }
+
 
 };
 
