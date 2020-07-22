@@ -10,15 +10,9 @@ const getWeather = async (location) => {
   const json = await res.json();
   const element = document.getElementById(location);
   const node = document.createElement("div");
-  node.className = "container";
+  // node.className = "container";
   node.innerHTML = `<h4 class="section-heading">${location}</h4>
-                    <div class="row">
-                      <div class="one column category">
-                      <img class="u-max-full-width" src="${json.src}"/>
-                      </div>
-                    </div>`;
-    node.innerHTML = `<h4 class="section-heading">${location}</h4>
-                      <img class="u-max-full-width" src="${json.src}"/>`
+                    <img class="u-max-full-width" src="${json.src}"/>`
   element.appendChild(node);
 };
 
