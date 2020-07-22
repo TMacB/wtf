@@ -4,54 +4,86 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js">
-<!--<![endif]-->
+  <!--<![endif]-->
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>WTF</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+    />
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+
     <!-- <link rel="stylesheet" href="style/normalize.css">
     <link rel="stylesheet" href="style/style.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-</head>
+  </head>
 
-<body>
+  <body>
     <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <div class="section hero">
+      <div class="container">
+        <div class="row">
+          <h3 class="hero-heading">Weather, Traffic and Ferries</h3>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
 
-        <h1>Weather, Traffic and Ferries</h1>
+    <div class="section weather">
+        <br/>
+        <h4 class="section-heading">Weather</h4>
+        <div id="metoffice"></div>
+        <div class="weather" id="Edinburgh"></div>
+        <div class="weather" id="Grantown on Spey"></div>
+        <div class="weather" id="Tongue"></div>
+        <div class="weather" id="Shieldaig"></div>
+        <div class="weather" id="Portree"></div>
+        <div class="weather" id="Glenelg"></div>
+        <div class="weather" id="Inveraray"></div>
+    </div>
 
-        <section>
-            <h2>Weather</h2>
-            <div id="metoffice"></div>
-            <div class="weather" id="Edinburgh"></div>
-            <div class="weather" id="Grantown on Spey"></div>
-            <div class="weather" id="Tongue"></div>
-            <div class="weather" id="Shieldaig"></div>
-            <div class="weather" id="Portree"></div>
-            <div class="weather" id="Glenelg"></div>
-            <div class="weather" id="Inveraray"></div>
-        </section>
+    <div class="section traffic">
+        <br/>
+        <h4 class="section-heading">Traffic</h4>
+        <div id="incidents"></div>
+        <div id="roadworks"></div>
+        <div id="bridges"></div>
+    </div>
 
-        <section>
-            <h2>Traffic</h2>
-            <div id="incidents"></div>
-            <div id="roadworks"></div>
-            <div id="bridges"></div>
-        </section>
-
-        <section>
-            <h2>Ferries</h2>
-            <div id="skyeferry"></div>
-            <div id="calmac"></div>
-        </section>
+    <div class="section ferries">
+        <br/>
+        <h4 class="section-heading">Ferries</h4>
+        <div id="skyeferry"></div>
+        <div id="calmac"></div>
+      </section>
     </div>
 
     <script src="js/main.js" async defer></script>
-</body>
-
+  </body>
 </html>

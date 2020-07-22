@@ -10,8 +10,7 @@ const getWeather = async (location) => {
   const json = await res.json();
   const element = document.getElementById(location);
   const node = document.createElement("div");
-  // node.className = "container";
-  node.innerHTML = `<h4 class="section-heading">${location}</h4>
+  node.innerHTML = `<h5 class="section-heading">${location}</h5>
                     <img class="u-max-full-width" src="${json.src}"/>`
   element.appendChild(node);
 };
@@ -64,7 +63,7 @@ const getCalmacStatus = async () => {
   });
 
   const element = document.getElementById('calmac');
-  const h = document.createElement("h4");
+  const h = document.createElement("h5");
   h.innerHTML = "Calmac";
   element.appendChild(h);
 
@@ -86,13 +85,13 @@ const getBridges = async () => {
   const json = await res.json();
   const element = document.getElementById('bridges');
 
-  const h = document.createElement("h4");
+  const h = document.createElement("h5");
   h.innerHTML = "Bridges";
   element.appendChild(h);
 
   const node = document.createElement("div");
   node.align = "center";
-  node.innerHTML = `<img src="${json.src}"/>`;
+  node.innerHTML = `<img class="u-max-full-width" src="${json.src}"/>`;
   element.appendChild(node);
 };
 
@@ -108,7 +107,7 @@ const getMetOfficeWarnings = async () => {
   // console.dir(json);
 
   const element = document.getElementById('metoffice');
-  const h = document.createElement("h4");
+  const h = document.createElement("h5");
 
   // console.log(json);
 
@@ -153,7 +152,7 @@ const getIncidents = async () => {
   // console.dir(json);
 
   const element = document.getElementById('incidents');
-  const h = document.createElement("h4");
+  const h = document.createElement("h5");
   h.innerHTML = "Incidents";
   element.appendChild(h);
 
@@ -192,7 +191,7 @@ const getRoadworks = async () => {
   });
 
   const element = document.getElementById('roadworks');
-  const h = document.createElement("h4");
+  const h = document.createElement("h5");
   h.className = "collapsible";
   h.onclick = function () {
     collapse(this);
@@ -260,7 +259,7 @@ const getSkyeFerry = async () => {
   const json = await res.json();
   const element = document.getElementById('skyeferry');
 
-  const h = document.createElement("h4");
+  const h = document.createElement("h5");
   h.innerHTML = "Glenelg / Skye Ferry";
   element.appendChild(h);
 
