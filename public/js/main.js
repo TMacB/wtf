@@ -85,13 +85,9 @@ const getBridges = async () => {
   const json = await res.json();
   const element = document.getElementById('bridges');
 
-  const h = document.createElement("h5");
-  h.innerHTML = "Bridges";
-  element.appendChild(h);
-
   const node = document.createElement("div");
-  node.align = "center";
-  node.innerHTML = `<img class="u-max-full-width" src="${json.src}"/>`;
+  node.innerHTML = `<h5 class="section-heading">Bridges</h5>
+                    <img class="u-max-full-width" src="${json.src}"/>`
   element.appendChild(node);
 };
 
