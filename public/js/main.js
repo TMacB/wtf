@@ -162,8 +162,9 @@ const getIncidents = async () => {
       el.innerHTML = `Error loading <a href="${j.link}">Travel Scotland Incidents</a> - Please try refreshing your browser`;
     }
     else {
-      // el.innerHTML = `<table><tr><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.pubDate}<span><br/>${j.content}</td></tr></table>`;
-      el.innerHTML = `<a href="${j.link}">${j.title}</a> <span class="date">- ${j.pubDate}<span><br/>${j.content}<br/><br/>`;
+      el.innerHTML = `<div style="float: left"><a href="${j.link}">${j.title}</a></div>
+                      <div style="float: left">&nbsp;<span class="date"> ${j.pubDate}<span></div><br/>
+                      ${j.content}<br/><br/>`;
     }
     element.appendChild(el);
   }
@@ -237,7 +238,7 @@ const getRoadworks = async () => {
       j.content = j.content.replace(/November/g, 'Nov');
       j.content = j.content.replace(/December/g, 'Dec');
 
-      el.innerHTML = `<a href="${j.link}">${j.title}</a> <span class="date">- ${j.content}</span><br/>`;
+      el.innerHTML = `<a href="${j.link}">${j.title}</a> <span class="date"> ${j.content}</span><br/>`;
     }
     content.appendChild(el);
   }

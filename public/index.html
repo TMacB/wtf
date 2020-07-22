@@ -32,6 +32,35 @@
 
     <!-- <link rel="stylesheet" href="style/normalize.css">
     <link rel="stylesheet" href="style/style.css"> -->
+
+    <style>
+      .date {
+  font-size: 0.8em;
+}
+
+.collapsible {
+}
+
+.content {
+  display: none;
+}
+
+.collapsible:after {
+  content: "[\02795]";
+  /* Unicode character for "plus" sign (+) */
+  /* font-size: 1em; */
+  color: white;
+  /* float: right; */
+  /* margin-right: 2em; */
+  padding-left: 0.5em;
+}
+
+.active:after {
+  content: "[\2796]";
+  /* Unicode character for "minus" sign (-) */
+}
+
+    </style>
   </head>
 
   <body>
@@ -51,33 +80,34 @@
 
     <div class="container">
 
-    <div class="section weather">
-        <br/>
-        <h4 class="section-heading">Weather</h4>
-        <div id="metoffice"></div>
-        <div class="weather" id="Edinburgh"></div>
-        <div class="weather" id="Grantown on Spey"></div>
-        <div class="weather" id="Tongue"></div>
-        <div class="weather" id="Shieldaig"></div>
-        <div class="weather" id="Portree"></div>
-        <div class="weather" id="Glenelg"></div>
-        <div class="weather" id="Inveraray"></div>
-    </div>
+      <div class="section weather">
+          <br/>
+          <h4 class="section-heading">Weather</h4>
+          <div id="metoffice"></div>
+          <div class="weather" id="Edinburgh"></div>
+          <div class="weather" id="Grantown on Spey"></div>
+          <div class="weather" id="Tongue"></div>
+          <div class="weather" id="Shieldaig"></div>
+          <div class="weather" id="Portree"></div>
+          <div class="weather" id="Glenelg"></div>
+          <div class="weather" id="Inveraray"></div>
+      </div>
 
-    <div class="section traffic">
-        <br/>
-        <h4 class="section-heading">Traffic</h4>
-        <div id="incidents"></div>
-        <div id="roadworks"></div>
-        <div id="bridges"></div>
-    </div>
+      <div class="section traffic">
+          <br/>
+          <h4 class="section-heading">Traffic</h4>
+          <div id="incidents"></div>
+          <div id="roadworks"></div>
+          <div id="bridges"></div>
+      </div>
 
-    <div class="section ferries">
-        <br/>
-        <h4 class="section-heading">Ferries</h4>
-        <div id="skyeferry"></div>
-        <div id="calmac"></div>
-      </section>
+      <div class="section ferries">
+          <br/>
+          <h4 class="section-heading">Ferries</h4>
+          <div id="skyeferry"></div>
+          <div id="calmac"></div>
+        </section>
+      </div>
     </div>
 
     <script src="js/main.js" async defer></script>
