@@ -17,7 +17,9 @@ const getWeather = async (location) => {
                       <img class="u-max-full-width" src="${json.src}"/>
                       </div>
                     </div>`;
-  element.appendChild(node);
+    node.innerHTML = `<h4 class="section-heading">${location}</h4>
+                      <img class="u-max-full-width" src="${json.src}"/>'
+                        element.appendChild(node);`
 };
 
 const getForecasts = () => {
@@ -113,8 +115,6 @@ const getMetOfficeWarnings = async () => {
 
   const element = document.getElementById('metoffice');
   const h = document.createElement("h4");
-  h.innerHTML = "Met Office Weather Warnings";
-  element.appendChild(h);
 
   // console.log(json);
 
@@ -123,6 +123,9 @@ const getMetOfficeWarnings = async () => {
   }
   else {
 
+    h.innerHTML = "Met Office Weather Warnings";
+    element.appendChild(h);
+  
     for (var s in json) {
       const j = json[s];
       const el = document.createElement("div");
