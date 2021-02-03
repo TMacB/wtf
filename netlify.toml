@@ -1,6 +1,6 @@
 [build]
   base = "/"
-  command = "make build"
+  command = "npm build"
   publish = "/public"
   functions = "/functions"
 
