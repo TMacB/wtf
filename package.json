@@ -20,8 +20,8 @@
     "puppeteer": "^2.0.0"
   },
   "dependencies": {
-    "chrome-aws-lambda": "^2.1.1",
+    "chrome-aws-lambda": "^10.1.0",
     "node-fetch": "^2.6.0",
-    "puppeteer-core": "^2.1.1"
+    "puppeteer-core": "^15.4.0"
   }
 }
