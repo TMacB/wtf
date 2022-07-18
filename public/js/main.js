@@ -45,7 +45,7 @@ const getMetOfficeWarnings = async () => {
   console.info(`main.js -> getMetOfficeWarnings`);
 
   // const res = await fetch(`/incidents`);
-  const res = await fetch(`/.netlify/functions/metoffice/metoffice.go`);
+  const res = await fetch(`/metoffice`);
   let html = await res.text();
 
   const element = document.getElementById('metoffice');
@@ -75,7 +75,7 @@ const getForecasts = () => {
   for (var i = 0; i < places.length; i++) {
     const location = places[i].id;
 
-    console.log(location);
+    // console.log(location);
 
     getWeather(location);
   }

@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"strings"
 
 	b64 "encoding/base64"
 
@@ -25,10 +24,9 @@ func Handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	)
 	defer cancel()
 
-	url := "https://yr.no"
-	url = "https://www.yr.no/en/forecast/graph/" + location
+	url := "https://www.yr.no/en/forecast/graph/" + location
 
-	fmt.Println(url)
+	// fmt.Println(url)
 
 	// run task list
 	var placename string
@@ -40,7 +38,7 @@ func Handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		log.Fatal(err)
 	}
 
-	log.Println(strings.TrimSpace(placename))
+	// log.Println(strings.TrimSpace(placename))
 
 	// capture screenshot of elements
 	var buf1 []byte
@@ -68,10 +66,8 @@ func Handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		// Headers:    map[string]string{"Content-Type": "image/jpeg"},
-		Headers: map[string]string{"Content-Type": "text/html; charset=UTF-8"},
-		Body:    html,
-		// Body: string(data);
+		Headers:    map[string]string{"Content-Type": "text/html; charset=UTF-8"},
+		Body:       html,
 	}, nil
 
 }
