@@ -1,17 +1,72 @@
 /*jshint esversion: 8 */
 
 // ===========================================
+// Met Office Warnings
+// ===========================================
+const getMetOfficeWarnings2 = async () => {
+  console.info(`main.js -> getMetOfficeWarnings`);
+
+  const res = await fetch(`/metoffice`);
+  const json = await res.json();
+  // console.dir(json);
+
+  const element = document.getElementById('metoffice');
+  const h = document.createElement("h5");
+
+  // console.log(json);
+
+  if (json.title == 'no warnings') {
+    element.style.display = 'none';
+  }
+  else {
+
+    h.innerHTML = "Met Office Weather Warnings";
+    element.appendChild(h);
+  
+    for (var s in json) {
+      const j = json[s];
+      const el = document.createElement("div");
+  
+      if (j.title == 'error') {
+        console.error("Error retrieving Met Office Warnings...");
+        console.error(j.content);
+        el.innerHTML = `Error loading <a href="${j.link}">Met Office Warnings</a> - Please try refreshing your browser`;
+      }
+      else {
+        el.innerHTML = `<table><tr><td><img src="${j.icon}"/>&nbsp;</td><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.time}</span><br/>${j.desc}</td></tr></table>`;
+      }
+      element.appendChild(el);
+    }
+
+  }
+};
+
+const getMetOfficeWarnings = async () => {
+  console.info(`main.js -> getMetOfficeWarnings`);
+
+  // const res = await fetch(`/incidents`);
+  const res = await fetch(`/.netlify/functions/metoffice/metoffice.go`);
+  let html = await res.text();
+
+  const element = document.getElementById('metoffice');
+  const el = document.createElement('div');
+  el.innerHTML = html;
+  
+  element.appendChild(el);
+};
+
+
+// ===========================================
 // Weather Forecasts
 // ===========================================
 const getWeather = async (location) => {
   console.info(`main.js -> getWeather -> ${location}`);
 
-  const res = await fetch(`/weather?location=${location.replace(/ /g, "_")}`);
-  const json = await res.json();
+  const res = await fetch(`/.netlify/functions/weather/weather.go?location=${location}`);
+  const html = await res.text();
   const element = document.getElementById(location);
   const node = document.createElement("div");
-  node.innerHTML = `<h6 class="section-heading">${location}</h6>
-                    <img class="u-max-full-width" src="${json.src}"/>`
+  node.innerHTML = html
   element.appendChild(node);
 };
 
@@ -19,6 +74,9 @@ const getForecasts = () => {
   const places = document.getElementsByClassName("weather");
   for (var i = 0; i < places.length; i++) {
     const location = places[i].id;
+
+    console.log(location);
+
     getWeather(location);
   }
 };
@@ -27,7 +85,7 @@ const getForecasts = () => {
 // ===========================================
 // Calmac Statuses
 // ===========================================
-const getCalmacStatus = async () => {
+const getCalmacStatus2 = async () => {
   console.info(`main.js -> getCalmacStatus`);
 
   const res = await fetch('/calmac');
@@ -74,11 +132,26 @@ const getCalmacStatus = async () => {
   }
 };
 
+const getCalmacStatus = async () => {
+  console.info(`main.js -> getCalmacStatus`);
+
+  // const res = await fetch(`/incidents`);
+  const res = await fetch(`/.netlify/functions/calmac/calmac.go`);
+  let html = await res.text();
+
+  const element = document.getElementById('calmac');
+
+  const el = document.createElement('div');
+  el.innerHTML = `<h5 class="section-heading">Calmac Ferries</h5>` + html + "<br/>"
+  
+  element.appendChild(el);
+};
+
 
 // ===========================================
 // Bridge Statuses
 // ===========================================
-const getBridges = async () => {
+const getBridges2 = async () => {
   console.info(`main.js -> getBridges`);
 
   const res = await fetch(`/bridges`);
@@ -91,49 +164,20 @@ const getBridges = async () => {
   element.appendChild(node);
 };
 
+const getBridges = async () => {
+  console.info(`main.js -> getBridges`);
 
-// ===========================================
-// Met Office Warnings
-// ===========================================
-const getMetOfficeWarnings = async () => {
-  console.info(`main.js -> getMetOfficeWarnings`);
+  const res = await fetch(`/.netlify/functions/bridges/bridges.go`);
 
-  const res = await fetch(`/metoffice`);
-  const json = await res.json();
-  // console.dir(json);
+  const html = await res.text();
+  const element = document.getElementById('bridges');
 
-  const element = document.getElementById('metoffice');
-  const h = document.createElement("h5");
-
-  // console.log(json);
-
-  if (json.title == 'no warnings') {
-    element.style.display = 'none';
-  }
-  else {
-
-    h.innerHTML = "Met Office Weather Warnings";
-    element.appendChild(h);
-  
-    for (var s in json) {
-      const j = json[s];
-      const el = document.createElement("div");
-  
-      if (j.title == 'error') {
-        console.error("Error retrieving Met Office Warnings...");
-        console.error(j.content);
-        el.innerHTML = `Error loading <a href="${j.link}">Met Office Warnings</a> - Please try refreshing your browser`;
-      }
-      else {
-        el.innerHTML = `<table><tr><td><img src="${j.icon}"/>&nbsp;</td><td><a href="${j.link}">${j.title}</a> <span class="date">- ${j.time}</span><br/>${j.desc}</td></tr></table>`;
-      }
-      element.appendChild(el);
-    }
-
-  }
-
+  const node = document.createElement("div");
+  node.innerHTML = `<h5 class="section-heading">Bridges</h5>` + html + "<br/>"
+  element.appendChild(node);
 
 };
+
 
 
 // ===========================================
@@ -142,39 +186,60 @@ const getMetOfficeWarnings = async () => {
 const getIncidents = async () => {
   console.info(`main.js -> getIncidents`);
 
-  const res = await fetch(`/incidents`);
-  let json = await res.json();
-  json = json.items;
-  // console.dir(json);
+  // const res = await fetch(`/incidents`);
+  const res = await fetch(`/.netlify/functions/incidents/incidents.go`);
+  let html = await res.text();
 
   const element = document.getElementById('incidents');
-  const h = document.createElement("h5");
-  h.innerHTML = "Incidents";
-  element.appendChild(h);
 
-  for (var s in json) {
-    const j = json[s];
+  // for (var s in json) {
+  //   const j = json[s];
     const el = document.createElement('div');
 
-    if (j.title == 'error') {
-      console.error("Error retrieving Travel Scotland Incidents...");
-      console.error(j.content);
-      el.innerHTML = `Error loading <a href="${j.link}">Travel Scotland Incidents</a> - Please try refreshing your browser`;
-    }
-    else {
-      el.innerHTML = `<div style="float: left"><a href="${j.link}">${j.title}</a></div>
-                      <div style="float: left">&nbsp;<span class="date"> ${j.pubDate}<span></div><br/>
-                      ${j.content}<br/><br/>`;
-    }
+    el.innerHTML = html;
+    
     element.appendChild(el);
-  }
+  // }
+};
+
+// ===========================================
+// Travel Scotland - Roadworks
+// ===========================================
+const getRoadworks = async () => {
+  console.info(`main.js -> getRoadworks`);
+
+  // const res = await fetch(`/incidents`);
+  const res = await fetch(`/.netlify/functions/roadworks/roadworks.go`);
+  let html = await res.text();
+
+  const element = document.getElementById('roadworks');
+  const h = document.createElement("h5");
+  h.className = "collapsible";
+  h.onclick = function () {
+    collapse(this);
+  };
+  h.innerHTML = "Roadworks";
+  element.appendChild(h);
+
+  const content = document.createElement("div");
+  content.className = "content";
+  element.appendChild(content);
+
+  // for (var s in json) {
+  //   const j = json[s];
+    const el = document.createElement('div');
+
+    el.innerHTML = html;
+    
+    content.appendChild(el);
+  // }
 };
 
 
 // ===========================================
 // Travel Scotland - Roadworks
 // ===========================================
-const getRoadworks = async () => {
+const getRoadworks2 = async () => {
   console.info(`main.js -> getRoadworks`);
 
   const res = await fetch(`/roadworks`);
@@ -252,13 +317,13 @@ const getRoadworks = async () => {
 const getSkyeFerry = async () => {
   console.info(`main.js -> getSkyeFerry`);
 
-  const res = await fetch(`/skyeferry`);
-  const json = await res.json();
+  const res = await fetch(`/.netlify/functions/skyeferry/skyeferry.go`);
+
+  const html = await res.text();
   const element = document.getElementById('skyeferry');
 
   const node = document.createElement("div");
-  node.innerHTML = `<h5 class="section-heading">Glenelg / Skye Ferry</h5>
-                    <img class="u-max-full-width" src="${json.src}"/>`
+  node.innerHTML = `<h5 class="section-heading">Glenelg / Skye Ferry</h5>` + html + "<br/>"
   element.appendChild(node);
 
 };
