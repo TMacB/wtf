@@ -151,7 +151,7 @@ const getCalmacStatus = async () => {
 // ===========================================
 // Bridge Statuses
 // ===========================================
-const getBridges2 = async () => {
+const getBridges = async () => {
   console.info(`main.js -> getBridges`);
 
   const res = await fetch(`/bridges`);
@@ -164,7 +164,7 @@ const getBridges2 = async () => {
   element.appendChild(node);
 };
 
-const getBridges = async () => {
+const getBridges2 = async () => {
   console.info(`main.js -> getBridges`);
 
   const res = await fetch(`/.netlify/functions/bridges/bridges.go`);

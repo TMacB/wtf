@@ -68,24 +68,20 @@ func Handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	html := ""
 	// html := "<h5>" + feed.Title + "</h5>"
 
-	for i, item := range calmac {
-		fmt.Println("index:", i, item.RouteName, item.Status)
+	for _, item := range calmac {
+		// fmt.Println("index:", i, item.RouteName, item.Status)
 
 		src := ""
 
 		switch item.Image {
 		case "normal":
 			src = "https://www.calmac.co.uk/image/1788/normal-icon-green/original.png"
-			break
 		case "beware":
 			src = "https://www.calmac.co.uk/image/3119/Be-Aware-Yellow-icon/original.jpg"
-			break
 		case "affected":
 			src = "https://www.calmac.co.uk/image/1787/maybe-affected-icon-amber/original.png"
-			break
 		case "disrupted":
 			src = "https://www.calmac.co.uk/image/1786/cancelled-icon-red/original.png"
-			break
 		default:
 			src = "no-image"
 		}

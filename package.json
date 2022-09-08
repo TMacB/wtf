@@ -16,12 +16,8 @@
     "url": "https://github.com/TMacB/wtf/issues"
   },
   "homepage": "https://github.com/TMacB/wtf#readme",
-  "devDependencies": {
-    "puppeteer": "^2.0.0"
-  },
   "dependencies": {
     "chrome-aws-lambda": "^10.1.0",
-    "node-fetch": "^2.6.0",
-    "puppeteer-core": "^15.4.0"
+    "node-fetch": "^3.2.9"
   }
 }

@@ -7,3 +7,4 @@
 /incidents /.netlify/functions/incidents/incidents.go 200
 /roadworks /.netlify/functions/roadworks/roadworks.go 200
 /skyeferry /.netlify/functions/skyeferry/skyeferry.go 200
+/hello /.netlify/functions/helloworld 200

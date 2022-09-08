@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/mmcdole/gofeed"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -15,12 +13,12 @@ func Handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	fp := gofeed.NewParser()
 	feed, _ := fp.ParseURL(url)
-	fmt.Println(feed)
+	// fmt.Println(feed)
 
 	html := "<h5>" + feed.Title + "</h5>"
 
-	for i, item := range feed.Items {
-		fmt.Println("index:", i, item)
+	for _, item := range feed.Items {
+		// fmt.Println("index:", i, item)
 		html = html + "<div style='float: left'><a href='" + item.Link + "'>" + item.Title + "</a></div>"
 		html = html + "<div style='float: left'>&nbsp;<span class='date'>" + item.Published + "<span></div><br/>" + item.Description + "<br/><br/>"
 	}
